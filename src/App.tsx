@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Movie } from './types';
+import MovieList from './components/MovieList/MovieList.tsx';
 
 
 const App: React.FC = () => {
@@ -14,9 +15,17 @@ const App: React.FC = () => {
     }
   };
 
+  const deleteMovie = (id: number) => {
+    setMovies(movies.filter(movie => movie.id !== id));
+  };
+
+  const updateMovie = (id: number, title: string) => {
+    setMovies(movies.map(movie => (movie.id === id ? { ...movie, title } : movie)));
+  };
+
   return (
     <div>
-      <h2>Movie Tracker</h2>
+      <h1>Movie Tracker</h1>
       <form onSubmit={addMovie}>
         <input
           value={inputValue}
@@ -25,6 +34,7 @@ const App: React.FC = () => {
         />
         <button type="submit">Add</button>
       </form>
+      <MovieList movies={movies} deleteMovie={deleteMovie} updateMovie={updateMovie} />
     </div>
   );
 };
