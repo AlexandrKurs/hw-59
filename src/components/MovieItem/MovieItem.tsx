@@ -10,7 +10,6 @@ interface MovieItemProps {
 const MovieItem: React.FC<MovieItemProps> = React.memo(({ movie, deleteMovie, updateMovie }) => {
   const [title, setTitle] = useState(movie.title);
 
-  // Синхронизация заголовка при изменении фильма
   useEffect(() => {
     setTitle(movie.title);
   }, [movie.title]);
@@ -24,13 +23,13 @@ const MovieItem: React.FC<MovieItemProps> = React.memo(({ movie, deleteMovie, up
 
   return (
     <li>
-      <form onSubmit={handleUpdate}>
+      <form className="movie-form" onSubmit={handleUpdate}>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Введите название фильма"
+          placeholder="Enter film name"
         />
-        <button type="button" onClick={() => deleteMovie(movie.id)}>Удалить</button>
+        <button type="button" onClick={() => deleteMovie(movie.id)}>X</button>
       </form>
     </li>
   );

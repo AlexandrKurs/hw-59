@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Movie } from './types';
 import MovieList from './components/MovieList/MovieList.tsx';
-
+import { Movie } from './types';
+import './App.css';
 
 const App: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -24,9 +24,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="app-container">
       <h1>Movie Tracker</h1>
-      <form onSubmit={addMovie}>
+      <form onSubmit={addMovie} className="movie-form">
         <input
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
@@ -34,6 +34,7 @@ const App: React.FC = () => {
         />
         <button type="submit">Add</button>
       </form>
+      <h2>Movie List</h2>
       <MovieList movies={movies} deleteMovie={deleteMovie} updateMovie={updateMovie} />
     </div>
   );
